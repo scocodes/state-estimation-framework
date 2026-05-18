@@ -1,6 +1,6 @@
 import numpy as np
 
-class BasicKalmen:
+class BasicKalman:
 
     def __init__(self, x, P, F, H, Q, R):
         self.x = x
@@ -18,11 +18,12 @@ class BasicKalmen:
         return self.x
 
     def update(self, z):
-
+        
         y = z - self.H@self.x
-        K = self.P@self.H.T@np.linalg.inv(self.H@self.P@self.H.T + self.R)
+        S = self.H@self.P@self.H.T + self.R
+        K = self.P@self.H.T@np.linalg.inv(S)
 
-        self.x = self.x + self.K@self.y
+        self.x = self.x + K@y
 
         I = np.eye(self.P.shape[0])
         self.P = (I-K@self.H)@self.P
