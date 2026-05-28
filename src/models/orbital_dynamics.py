@@ -9,7 +9,7 @@ class OrbitalDynamics:
         self.height = height
         self.dt = dt
         self.atm = Atmosphere()
-        self.dyn = Dynamics()
+        self.dyn = Dynamics(self.atm)
 
     def orbit_propagation(self):
             
@@ -26,7 +26,11 @@ class OrbitalDynamics:
             y0 = np.hstack((r0, v0))
             y = y0.copy()
 
-            y = rk4_step(Dynamics.two_body_rhs, 0, y, self.dt)
+            y = rk4_step(self.dyn.two_body_rhs, 0, y, self.dt)
 
             return y
                 
+
+orb = OrbitalDynamics(1000, 10)
+
+print(orb.orbit_propagation())
