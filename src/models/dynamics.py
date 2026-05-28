@@ -26,7 +26,7 @@ class OrbitalDynamics:
             y0 = np.hstack((r0, v0))
             y = y0.copy()
 
-            y = rk4_step(Dynamics.two_body_rhs, 0, y)
+            y = rk4_step(Dynamics.two_body_rhs, 0, y, self.dt)
 
             return y
                 
