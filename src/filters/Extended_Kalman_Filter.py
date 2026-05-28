@@ -18,7 +18,9 @@ class Ekf:
 
         p_pred = self.covariance(F, P, Q)
 
-        H = np.array([[1,0,0,0,0,0], [0,1,0,0,0,0], [0,0,1,0,0,0]])
+        H = np.array([[1,0,0,0,0,0],
+                    [0,1,0,0,0,0],
+                    [0,0,1,0,0,0]])
 
         z = x_pred[:3] + np.random.normal(0, 100, size=3)
 
@@ -26,13 +28,15 @@ class Ekf:
 
         y = z - z_pred
 
-        S = p_pred@H.T + R
+        S = H@p_pred@H.T + R
         K = p_pred @ H.T @ np.linalg.inv(S)
 
         x_update = x_pred + K@y
 
         I = np.eye(6)
-        p_update = (I-K@H)@p_pred(I-K@H).T + K@R@K.T
+        p_update = (I-K@H)@p_pred@(I-K@H).T + K@R@K.T
+
+        print(x_pred, x_update)
 
         return x_update, p_update
 

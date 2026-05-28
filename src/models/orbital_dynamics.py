@@ -24,7 +24,7 @@ class OrbitalDynamics:
         return y0
 
     def orbit_propagation(self):
-        x0 = rk4_step(self.dyn.two_body_rhs, 0, self.initial_state, self.dt)
+        x0 = rk4_step(self.dyn.two_body_rhs, 0, self.initial_state(self.height), self.dt)
         return x0
 
     def finite_difference_jacobian(self):
