@@ -47,6 +47,3 @@ class OrbitalDynamics:
         return F
         
          
-
-orb = OrbitalDynamics(10, 1e-3)
-print(orb.finite_difference_jacobian())
