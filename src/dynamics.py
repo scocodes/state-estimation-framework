@@ -16,7 +16,7 @@ class OrbitalDynamics:
             height_km = self.height*1e3   
             r0_mag = self.atm.r_earth + height_km
 
-            # Initial time parameters
+            # Initial time parameterscd 
             T = 2*np.pi*np.sqrt((r0_mag**3)/self.atm.mu_earth)
 
             # Initial Positional parameters
